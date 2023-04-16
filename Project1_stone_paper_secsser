@@ -1,0 +1,524 @@
+// Project 1 .
+#include <iostream>
+
+#include<cstdlib>
+
+using namespace std;
+
+enum EnChoesPlyers
+
+{
+
+	Stone = 1, Paper = 2, Scissor = 3
+
+};
+
+enum EnColors {
+
+	Read = 1, Yallo = 2, Blacke = 3, Grean = 4
+
+};
+
+enum EnWhoIsWinner {
+
+	Computer = 1, Plyers = 2, Draw = 3
+
+};
+
+void  ColorOfResultGame(EnColors Coloers) {
+
+	switch (Coloers)
+
+	{
+
+	case EnColors:: Read:
+
+		system("color 4F");
+
+		break;
+
+	case EnColors::Yallo:
+
+		system("color 6F");
+
+		break;
+
+	case EnColors::Blacke:
+
+		system("color 0F");
+
+		break;
+
+	case  EnColors::Grean:
+
+		system("color 2F");
+
+		break;
+
+	default:
+
+		break;
+
+	}
+
+}
+
+struct StrStorevalues_Of_the_Players
+
+{
+
+	short HowManyRoundGame;
+
+	EnChoesPlyers PlyerChois;
+
+	EnChoesPlyers ComputerChois;
+
+	EnChoesPlyers RoundWinner;
+
+	int DrwaTimes;
+
+};
+
+int RandmNumber(int From, int To) {
+
+	int Random = rand() % (To - From + 1) + From;
+
+	return Random;
+
+}
+
+int ReadNumber(string comint) {
+
+	int Number = 0;
+
+	do
+
+	{
+
+		cout << comint << endl;
+
+		cin >> Number;
+
+	} while (Number <= 0);
+
+	return Number;
+
+}
+
+string ConvertEnumToString(EnChoesPlyers EnumToString) {
+
+	switch (EnumToString)
+
+	{
+
+	case EnChoesPlyers::Stone:
+
+		return "Stone";
+
+		break;
+
+	case  EnChoesPlyers::Paper:
+
+		return "Paper";
+
+		break;
+
+	case EnChoesPlyers::Scissor:
+
+		return "Scissor";
+
+		break;
+
+	default:
+
+		return "NoWinner";
+
+		break;
+
+	}
+
+}
+
+string ConverEnumToStringWhoIsWinner(EnWhoIsWinner Winner) {
+
+	switch (Winner)
+
+	{
+
+	case EnWhoIsWinner:: Computer:
+
+		return "Computer Is Winner ";
+
+		break;
+
+	case   EnWhoIsWinner::Plyers:
+
+		return "Plyer Is Winner ";
+
+		break;
+
+	case   EnWhoIsWinner::Draw:
+
+		return "No Winner";
+
+		break;
+
+	default:
+
+		break;
+
+	}
+
+}
+
+EnChoesPlyers ConvertIntToEnum(int Inttypes) {
+
+	EnChoesPlyers EnumTypes;
+
+	return EnumTypes = (EnChoesPlyers)Inttypes;
+
+}
+
+struct StrResultGame
+
+{
+
+	int GameRound;
+
+	int NumbersComputerwinner;
+
+	int NumbersPlyersWinner;
+
+	int Drawtimes;
+
+	string FinalWinner;
+
+};
+
+EnChoesPlyers YourChoiesOfGames() {
+
+		EnChoesPlyers EnPlyerChoies;
+
+		int ReadNumberIntFromPlyer = 0;
+
+		ReadNumberIntFromPlyer = ReadNumber("You Choies : [1]:Stone , [2]:Paper ,[3]:Scissors ?");
+
+		return EnPlyerChoies = ConvertIntToEnum(ReadNumberIntFromPlyer);
+
+}
+
+EnChoesPlyers ComputerChoiesRandomlyInGames() {
+
+	EnChoesPlyers EnComputerChoies;
+
+	int ComputerChoes = RandmNumber(1, 3);
+
+	 return EnComputerChoies= ConvertIntToEnum(ComputerChoes);
+
+	
+
+}
+
+EnWhoIsWinner CompareWhoIsWinner(StrStorevalues_Of_the_Players  WhoIsWinner) {
+
+	
+
+	
+
+	if (WhoIsWinner.ComputerChois == EnChoesPlyers::Paper && WhoIsWinner.PlyerChois == EnChoesPlyers::Stone)
+
+		return   EnWhoIsWinner::Computer;
+
+	else if (WhoIsWinner.ComputerChois == EnChoesPlyers::Paper && WhoIsWinner.PlyerChois == EnChoesPlyers::Paper)
+
+		return EnWhoIsWinner::Draw;
+
+	else if (WhoIsWinner.ComputerChois == EnChoesPlyers::Scissor && WhoIsWinner.PlyerChois == EnChoesPlyers::Paper)
+
+		return EnWhoIsWinner::Computer;
+
+	else if (WhoIsWinner.ComputerChois == EnChoesPlyers::Scissor && WhoIsWinner.PlyerChois == EnChoesPlyers::Scissor)
+
+		return EnWhoIsWinner::Draw;
+
+	else if (WhoIsWinner.ComputerChois == EnChoesPlyers::Stone && WhoIsWinner.PlyerChois == EnChoesPlyers::Scissor)
+
+		return EnWhoIsWinner::Computer;
+
+	else if (WhoIsWinner.ComputerChois == EnChoesPlyers::Stone && WhoIsWinner.PlyerChois == EnChoesPlyers::Stone)
+
+		return EnWhoIsWinner::Draw;
+
+	else
+
+		return EnWhoIsWinner::Plyers;
+
+}
+
+int FillRound() {
+
+	int Round = 0;
+
+	Round = ReadNumber("Ente Round 1 to 10  Plz : ");
+
+	return Round;
+
+}
+
+//جهل الراوند منفصل 
+
+//
+
+/*
+
+int  HowManyWinnrComputer(string ComputerWinner) {
+
+	int NumbersComputerWineer = 0, NumbersPlyersWineer = 0;
+
+	if (ComputerWinner == "Computer Wineer") {
+
+		NumbersComputerWineer = NumbersComputerWineer + 1;
+
+		ColorOfResultGame(EnColors::Read);
+
+	}
+
+	return NumbersComputerWineer;
+
+}
+
+*/
+
+int  HowManyWinnrComputer(EnWhoIsWinner ComputerWinner) {
+
+	int NumbersComputerWineer = 0, NumbersPlyersWineer = 0;
+
+	if (ComputerWinner == EnWhoIsWinner::Computer) {
+
+		NumbersComputerWineer = NumbersComputerWineer + 1;
+
+		ColorOfResultGame(EnColors::Read);
+
+	}
+
+	return NumbersComputerWineer;
+
+}
+
+int  HowManyWinnrPlyer(EnWhoIsWinner PlyerWinner) {
+
+	int NumbersComputerWineer = 0, NumbersPlyersWineer = 0;
+
+	if (PlyerWinner == EnWhoIsWinner::Plyers) {
+
+		NumbersPlyersWineer = NumbersPlyersWineer + 1;
+
+		ColorOfResultGame(EnColors::Grean);
+
+	}
+
+	return NumbersPlyersWineer;
+
+}
+
+int DrawTimesComputerAndPlyers(EnWhoIsWinner DrawTime) {
+
+	int HoManyDraoTime = 0;
+
+	if (DrawTime == EnWhoIsWinner::Draw) {
+
+		HoManyDraoTime = HoManyDraoTime + 1;
+
+		ColorOfResultGame(EnColors::Yallo);
+
+	}
+
+	return HoManyDraoTime;
+
+}
+
+string  FinelWinnerPlyer(StrResultGame WhoeIsWinner) {
+
+	string ComputerWinner, PlyersWinner;
+
+	if (WhoeIsWinner.NumbersComputerwinner > WhoeIsWinner.NumbersPlyersWinner)
+
+		return "Computer Winner";
+
+	else if (WhoeIsWinner.NumbersComputerwinner < WhoeIsWinner.NumbersPlyersWinner)
+
+		return "Plyer Is Winner";
+
+	else
+
+		return "No Winner";
+
+}
+
+StrResultGame StartGames() {
+
+	int HowManyRoundToPlye = FillRound();
+
+	StrStorevalues_Of_the_Players FillValueOfStartGame; StrResultGame ResultGameOfAllRound;
+
+	EnWhoIsWinner WhoeIsWinneAndDrwTimes;
+
+	int DreawTime = 0;
+
+	int PlyerWinnerTime = 0;
+
+	int ComputerWinner = 0;
+
+	for (int i = 1; i <= HowManyRoundToPlye; i++) {
+
+		cout << "Round [" << i << "]" << "Begins: " << endl;
+
+		FillValueOfStartGame.PlyerChois = YourChoiesOfGames();
+
+		FillValueOfStartGame.ComputerChois = ComputerChoiesRandomlyInGames();
+
+		WhoeIsWinneAndDrwTimes = CompareWhoIsWinner(FillValueOfStartGame);
+
+		cout << "\n_______________Round [" << i << "]_______________\n";
+
+		cout << "Plyer Chois    : " << ConvertEnumToString( FillValueOfStartGame.PlyerChois) << "\n";
+
+		cout << "Computer Chois :" << ConvertEnumToString( FillValueOfStartGame.ComputerChois) << "\n";
+
+		cout << "Round Winner   : [" << ConverEnumToStringWhoIsWinner (WhoeIsWinneAndDrwTimes) << " ]" << "\n";
+
+		cout << "\n______________________________________\n";
+
+		ResultGameOfAllRound.GameRound = HowManyRoundToPlye;
+
+		PlyerWinnerTime += HowManyWinnrPlyer(WhoeIsWinneAndDrwTimes);
+
+		//ResultGameOfAllRound.NumbersComputerwinner = ResultGameOfAllRound.NumbersComputerwinner +HowManyWinnrComputer(WhoeIsWinneAndDrwTimes);
+
+		ComputerWinner += HowManyWinnrComputer(WhoeIsWinneAndDrwTimes);
+
+		DreawTime += DrawTimesComputerAndPlyers(WhoeIsWinneAndDrwTimes);
+
+	}
+
+	ResultGameOfAllRound.NumbersPlyersWinner = PlyerWinnerTime;
+
+	ResultGameOfAllRound.NumbersComputerwinner = ComputerWinner;
+
+	ResultGameOfAllRound.Drawtimes = DreawTime;
+
+	ResultGameOfAllRound.FinalWinner = FinelWinnerPlyer(ResultGameOfAllRound);
+
+	return ResultGameOfAllRound;
+
+	///
+
+}
+
+string PrintSpaceYouWianted(int Number) {
+
+	string Space = "";
+
+	for (int i = 0; i < Number; i++) {
+
+		Space += "\t";
+
+	}
+
+	return Space;
+
+}
+
+void PrintGameOvver() {
+
+	string Space = PrintSpaceYouWianted(2);
+
+	string Space2 = PrintSpaceYouWianted(6);
+
+	cout << Space << "________________________________________________________________________________________\n";
+
+	cout << Space << "\n\n" << Space2 << " G a m e O v e r  + + + \n\n";
+
+	cout << Space << "________________________________________________________________________________________\n";
+
+}
+
+void PrintLeastResultOfGame(StrResultGame ResultGame) {
+
+	string Space = PrintSpaceYouWianted(2);
+
+	PrintGameOvver();
+
+	cout <<endl<< Space << "___________________________________[ Game Results ]_____________________________________\n\n";
+
+	cout << Space << "Game Round          :" << Space << ResultGame.GameRound << endl;
+
+	cout << Space << "Player 1 Wone Times :" << Space << ResultGame.NumbersPlyersWinner << endl;
+
+	cout << Space << "Computer  Wone Times:" << Space << ResultGame.NumbersComputerwinner << endl;
+
+	cout << Space << "Draw 1 Times        :" << Space << ResultGame.Drawtimes << endl;
+
+	cout << Space << "Final Winner Times  :" << Space << ResultGame.FinalWinner << endl;
+
+}
+
+void ClearScreen() {
+
+	system("cls");
+
+	ColorOfResultGame(EnColors::Blacke);
+
+}
+
+void ResultGameOver() {
+
+	char PlyeAgeinAnsserYOrN = 'y';
+
+	do {
+
+		PrintLeastResultOfGame(StartGames());
+
+		cout << "Do You Weent Play Aagine Y Or N ";
+
+		cin >> PlyeAgeinAnsserYOrN;
+
+		if (PlyeAgeinAnsserYOrN == 'y') {
+
+			ClearScreen();
+
+		}
+
+	} while (PlyeAgeinAnsserYOrN != 'n');
+
+}
+
+int main()
+
+{
+
+	srand((unsigned)time(NULL));
+
+	ResultGameOver();
+
+	//ResultGameOver(StartGames(FillHowManyRoundPlayAndChoesEchUserAndcomputer()));
+
+}
+
+// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+
+// Debug program: F5 or Debug > Start Debugging menu
+
+// Tips for Getting Started: 
+
+//   1. Use the Solution Explorer window to add/manage files
+
+//   2. Use the Team Explorer window to connect to source control
+
+//   3. Use the Output window to see build output and other messages
+
+//   4. Use the Error List window to view errors
+
+//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
+
+//   6. In the future, to open this project again, go to File > Open > Project and select the .sln fileh7
